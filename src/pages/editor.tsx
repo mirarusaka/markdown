@@ -1,6 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+const { useState } = React
+
 const Header = styled.header`
   font-size: 1.5rem;
   height: 2rem;
@@ -42,15 +44,25 @@ const Preview = styled.div`
   top: 0;
   width: 50vw;
 `
+const StorageKey = 'pages/editor:text'
 
 export const Editor: React.FC = () => {
+    const [text, setText] = useState<string>(localStorage.getItem(StorageKey) || '')
+
   return (
     <>
       <Header>
         Markdown Editor
       </Header>
       <Wrapper>
-        <TextArea value="テキスト入力エリア" />
+        <TextArea
+            onChange={(event) => {
+                const changedText = event.target.value
+                localStorage.setItem(StorageKey, changedText)
+                setText(changedText)
+            }}
+            value={text}
+        />
         <Preview>プレビューエリア</Preview>
       </Wrapper>
     </>
