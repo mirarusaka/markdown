@@ -26,7 +26,7 @@ const Main: React.FC = () => {
       <GlobalStyle />
       <Router>
         <Switch>
-          <Route exact path="/editor">
+          <Route exact path="/no-markdown-editor.herokuapp.com">
             <Editor
               text={text}
               setText={setText}
